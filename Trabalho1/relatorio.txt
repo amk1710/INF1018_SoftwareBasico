@@ -1,0 +1,44 @@
+
+André Mazal Krauss 1410386 3WB, professora Ana
+
+Testes realizados com as seguintes structs:
+
+Primeira: Sucesso para codificaçao e descodificação
+
+struct X1 {
+  int i0;
+  int i1;
+  int i2;
+} x1 = {500, 0x0010, -23};
+
+Segunda: Sucesso para codificaçao e descodificação
+
+struct X2 {
+  int i1;
+  int l;
+  int i2;
+  int i3;
+  int l2;
+  int i4;
+  long l3;
+} x2 = {500, -50,-23, -17, 677, -43, 12345232147483648};
+
+Terceira: Sucesso para codificaçao e descodificação
+
+struct X3 {
+ 	int i1;
+ 	int i2;
+	long l;
+  
+} x3 = {-23 ,500, -50};
+
+Ultima: Sucesso para codificaçao e descodificação
+
+struct t{
+	int i1;
+} teste = {500};
+
+Esses testes não detectaram problema com numeros pares de ints ao final e não detectaram problema com a escrita do numero 0, na função codificação. Na descodificação, o teste não detectou problemas com números grandes que poderiam dar overflow em int e longs com sinal, mas caberiam num signed. 
+
+Esses casos foram vistos e corrigidos nos testes com Dados 1, 3, 4, 5, 9, 10 para a função code, 
+e com os casos SD3, SD4 para a função decode.

@@ -1,0 +1,27 @@
+1 - O array b tem 4(tamanho de int) * 2(numero de elementos no vetor) = 8 bytes.
+		Já o a tem 2(tamanho de short) * 2*3(numero de elementos na matriz) = 12 bytes.
+		As entradas de cada vetor são armazenadas sequencialmente na memória, sendo que internamente cada variavel obedece à arquitetura little endian. 
+
+2- A estrutura também é armazenada sequecialmente na memoria, com os valores individuais armazenados com os bits menos significativos primeiro(little endian). O buraco é causado pelo fato de o sistema navegar internamente o struct usando como referencia o tipo com o maior tamanho em bytes, para preservar o alinhamento das variávies. Para que o short permaneça alinhado, dois bytes devem não ser utilizados, por isso o buraco de dois bytes.
+
+3 - Nas respostas a seguir, todas variáveis individuais são armazenadas da maneiras little endian, e todos os bytes preenchidos com 0's são os bytes de padding.
+a. X1 - Tamanho 12 bytes. Um byte preenchido com c1, seguido de três preenchidos com 0's,  seguido de 4 com i, seguido de um com c2, seguido de 3 bytes preenchidos com 0's.
+b. X2 - Tamanho 16 bytes. Oito bytes preenchidos por l, seguido  por 1 byte usado pelo c, seguido de 7 preenchidos com 0's.
+c. X3 - Tamanho de 8 bytes. Quatro bytes usados por i, 1 usado por c1, 1 usado por c2, e dois preenchidos com 0's.
+d. X4 - Tamanho de 24 bytes. 16 bytes preenchidos pelo struct X2(ou seja, 8 bytes com o l, um com o c e 7 bytes preenchidos com 0's), seguido de um preenchido pelo char c da estrutura X4 e outros 7 bytes preenchidos com 0's.
+e. X5 - Tamanho de 3 bytes. Um com c1, seguido de um com c2 e outro com c3.
+f. X6 - Tamanho de 16 bytes. 2 bytes usados por s1, seguido de 2 preenchidos com 0's, seguido de 4 bytes usados por i, seguido de tres bytes usados pelo vetor de char c, seguido de um byte preenchido com 0's,  seguido de dois bytes usados 
+
+
+
+3 - Cada nome da variavel em parenteses indica que aquele byte é usado por aquela variavel. (p) indica um byte de padding.
+a. Tamanho de 12 bytes. (c1)(p)(p)(p)(i)(i)(i)(i)(c2)(p)(p)(p)
+b. Tamanho de 16 bytes. (l)(l)(l)(l)(l)(l)(l)(l)(c)(p)(p)(p)(p)(p)(p)(p)
+c. Tamanho de 8 bytes. (i)(i)(i)(i)(c1)(c2)(p)(p)
+d. Tamanho de 24 bytes. (l)(l)(l)(l)(l)(l)(l)(l)(c)(p)(p)(p)(p)(p)(p)(p)(c)(p)(p)(p)(p)(p)(p)(p)
+e. Tamanho de 3 bytes. (c1)(c2)(c3)
+f. Tamanho de 16 bytes. (s1)(s1)(p)(p)(i)(i)(i)(i)(c[0])(c[1])(c[2])(p)(s2)(s2)(p)(p)
+g. Tamanho de 8 bytes. Caso i: (i)(i)(i)(i)(p)(p)(p)(p)
+		       Caso char c[5]: (c[0])(c[1])(c[2])(c[3])(c[4])(p)(p)(p)
+h. Tamanho de 6 bytes. Caso s: (s)(s)(p)(p)(p)(p)
+			Caso char c[5]: (c[0])(c[1])(c[2])(c[3])(c[4])(p)

@@ -1,0 +1,15 @@
+2 - O programa vai imprimir:
+
+l=-32765, k=32771
+dump de l:
+(endereço do byte menos significativo de l) - 03
+(endereço do byte mais significativo de l) - 80
+dump de k:
+(endereço do byte menos significativo de k) - 03
+(endereço do byte mais significativo de k) - 80
+
+3- ver arquivo xbyte.c
+
+4- O primeiro programa responde corretamente porque ele é consistente com o seu tipo de inteiro, no caso, signed. A atribuição, impressão e comparação acontecem com esse mesmo tipo. Já o segundo programa é inconsistente, por atribuir em unsigned, ler para impressão em signed(%d) e comparar em unsigned por default. x e y são lidos como signed, mas na comparação são lidos como foram atribuidos, ou seja, os valores unsigned de 0xffffffff(4294967295 em decimal) e 2. A confusão é fruto de 0xffffffff possuir valores diferentes caso encarado como inteiro complemento a 2(-1) ou inteiro unsigned(4294967295).
+
+5 - FALTA FAZER

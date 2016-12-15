@@ -1,0 +1,9 @@
+v0 = p0 - p1
+if v0 3 3 7
+v0 = p1 - p2
+if v0 5 5 6
+ret p2
+ret p1
+v0 = p0 - p2
+if v0 5 5 9
+ret p0

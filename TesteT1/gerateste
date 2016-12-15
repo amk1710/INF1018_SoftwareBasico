@@ -1,0 +1,3 @@
+clear
+gcc -Wall -o codifica code.c testacode.c
+gcc -Wall -o decodifica code.c testadecode.c

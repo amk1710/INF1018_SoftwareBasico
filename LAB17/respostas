@@ -1,0 +1,19 @@
+respostas:
+
+2:
+U indica que aquela entidade não está definida naquele .o, é uma referência externa ainda não resolvida.
+T indica que foi definida na área de texto(.text), e portanto é um trecho de código
+D indica que foi definida na área de dados, e é portanto alguma variável.
+
+3: ocorreu um erro de compilação resultante do fato de a ter sido definido em lugares distintos como variáveis de tipos distintos. Assim, a inclusão dos headers também pelos módulos que definem os símbolos garantem que eles serão interpretados consistentemente por todos os módulos.
+
+4: 
+a)a função imprimiu 1277. Isso aconteceu porque a função foo interpretou a como um char, já que ele foi assim definido naquele contexto(extern char a). Assim , quando foi gravar o valor de -3 em um char no endereço do inteiro a, assim definido em temp1.c, alterou só o byte menos significativo, que é o primeiro(little endian). Na hora do printf, na memória estava gravado em a o valor em hexa: 00 00 04 FD = 1277 na base 10.
+
+b) Resultou em um erro no link editor, indicando que a foi definido múltiplas vezes. Uma vez como char em temp2, outra como inteiro em temp1. O link editor, porém informa somente os tamanho de 1 e 4 bytes, não os tipos associados, que desconhece.
+
+c) É impresso na tela o valor de 1024. Static char a criou uma variável a só visivel no módulo temp2, (d minúsculo associado ao símbolo) e que portanto não conflitou com temp1. Porém, a função foo não mais faz o que esperaríamos, porque ela alterou sua própria variável a, e não uma variável inteira a, de cuja existencia nunca foi informada.
+
+5:
+a. Um segmentation fault. Como b nunca foi definido em temp1, na listagem de símbolos de temp1 ele está como undefined e uma referencia externa. Em temp2, ele foi definido como variável, e listado como dado. Assim, na link edição, temp1 corrige o valor da suposta função b pelo da variável b. Quando essa função é chamada, tenta-se executar uma instrução inválida, resultando em segfault.
+b. Como substituímos o valor de b pelo código de máquina de uma instrução de retorno, quando b é chamada, essa instrução é executada. A suposta funçao b retorna sem fazer nada e temp1 segue normalmente.
